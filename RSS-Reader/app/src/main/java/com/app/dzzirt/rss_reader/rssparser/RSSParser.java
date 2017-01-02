@@ -1,6 +1,6 @@
 package com.app.dzzirt.rss_reader.rssparser;
 
-import com.app.dzzirt.rss_reader.RSSItem;
+import com.app.dzzirt.rss_reader.common.RSSItem;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

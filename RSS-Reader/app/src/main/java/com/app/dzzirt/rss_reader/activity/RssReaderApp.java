@@ -1,10 +1,11 @@
-package com.app.dzzirt.rss_reader;
+package com.app.dzzirt.rss_reader.activity;
 
 import android.app.Application;
 
 import com.app.dzzirt.rss_reader.greendao.DaoMaster;
 import com.app.dzzirt.rss_reader.greendao.DaoSession;
 import com.app.dzzirt.rss_reader.greendao.UpgradingDatabaseOpenHelper;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -20,6 +21,7 @@ public class RssReaderApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fresco.initialize(this);
         DaoMaster.OpenHelper helper = new UpgradingDatabaseOpenHelper(this, DATABASE_NAME);
         m_globalSession = new DaoMaster(helper.getWritableDb()).newSession();
     }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/my_image_view"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            android:background="@drawable/thumbnail_border" />
+
+        <TextView
+            android:text="ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            android:textSize="@dimen/rss_element_tile_title_size"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/my_image_view"
+            android:layout_toEndOf="@+id/my_image_view"
+            android:layout_marginLeft="27dp"
+            android:layout_marginStart="27dp"
+            android:ellipsize="end"
+            android:textColor="@android:color/black"
+            android:maxLines="1" />
+
+        <TextView
+            android:text="ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/describtion"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/rss_element_tile_decribtion_size"
+
+            android:maxLines="3"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/title"
+            android:layout_alignStart="@+id/title"
+            android:ellipsize="end" />
+
+    </RelativeLayout>
+</LinearLayout>

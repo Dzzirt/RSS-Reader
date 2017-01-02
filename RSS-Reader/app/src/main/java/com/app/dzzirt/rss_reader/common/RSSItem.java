@@ -1,4 +1,4 @@
-package com.app.dzzirt.rss_reader;
+package com.app.dzzirt.rss_reader.common;
 
 /**
  * Created by Dzzirt on 30.12.2016.
