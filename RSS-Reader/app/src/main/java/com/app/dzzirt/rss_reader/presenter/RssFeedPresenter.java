@@ -26,19 +26,26 @@ public class RssFeedPresenter extends MvpPresenter<RssFeedView> {
         getViewState().initFeedList(rssItemAdapter);
     }
 
+    public void onRefresh() {
+        getViewState().updateFeedData(getRssItemsList());
+        getViewState().resetRefreshing();
+    }
+
     private List<RSSItem> getRssItemsList() {
         //get list from model
         ArrayList<RSSItem> rssItems = new ArrayList<>();
-        rssItems.add(new RSSItem() {
-            {
-                setAutor("Nikita");
-                setDescribtion("Describtion");
-                setGuid("42");
-                setImageUri("http://www.popoptiq.com/wp-content/uploads/2012/11/Futurama.jpeg");
-                setPubDate("03.01.2017");
-                setTitle("Futurama");
-            }
-        });
+        for (int i = 0; i < 10; i++) {
+            rssItems.add(new RSSItem() {
+                {
+                    setAutor("Nikita");
+                    setDescribtion("Describtion");
+                    setGuid("42");
+                    setImageUri("http://www.popoptiq.com/wp-content/uploads/2012/11/Futurama.jpeg");
+                    setPubDate("03.01.2017");
+                    setTitle("Futurama");
+                }
+            });
+        }
         return rssItems;
     }
 }

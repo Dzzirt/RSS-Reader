@@ -20,12 +20,9 @@ public class RssItemAdapter extends RecyclerView.Adapter<RssItemAdapter.RssItemV
 
     private List<RSSItem> m_items;
     private OnItemClickListener m_onItemClickListener;
+
     public RssItemAdapter(List<RSSItem> items) {
         m_items = items;
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        m_onItemClickListener = listener;
     }
 
     class RssItemViewHolder extends RecyclerView.ViewHolder {
@@ -43,6 +40,20 @@ public class RssItemAdapter extends RecyclerView.Adapter<RssItemAdapter.RssItemV
             describtion = (TextView) itemView.findViewById(R.id.describtion);
         }
 
+    }
+    
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        m_onItemClickListener = listener;
+    }
+
+    public void clear() {
+        m_items.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<RSSItem> list) {
+        m_items.addAll(list);
+        notifyDataSetChanged();
     }
 
     public RssItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

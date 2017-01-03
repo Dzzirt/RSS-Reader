@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import com.app.dzzirt.rss_reader.common.RSSItem;
 import com.arellomobile.mvp.MvpView;
 
+import java.util.List;
+
 /**
  * Created by Dzzirt on 02.01.2017.
  */
@@ -12,4 +14,6 @@ import com.arellomobile.mvp.MvpView;
 public interface RssFeedView extends MvpView {
     void showRssItemInfo(RSSItem item);
     void initFeedList(RecyclerView.Adapter adapter);
+    void updateFeedData(List<RSSItem> items);
+    void resetRefreshing();
 }

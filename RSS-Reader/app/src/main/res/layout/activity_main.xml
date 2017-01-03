@@ -18,10 +18,19 @@
         app:title="@string/feed"
         android:animateLayoutChanges="false" />
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pullToRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/feed_toolbar">
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/feed_recyclerview"
         android:layout_below="@+id/feed_toolbar" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
