@@ -7,10 +7,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:clickable="false"
+        android:background="?android:attr/selectableItemBackground">
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/my_image_view"
+            android:id="@+id/thumbnail"
             android:layout_width="130dp"
             android:layout_height="130dp"
             fresco:placeholderImage="@mipmap/ic_launcher"
@@ -23,8 +25,8 @@
             android:id="@+id/title"
             android:textSize="@dimen/rss_element_tile_title_size"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/my_image_view"
-            android:layout_toEndOf="@+id/my_image_view"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:layout_toEndOf="@+id/thumbnail"
             android:layout_marginLeft="27dp"
             android:layout_marginStart="27dp"
             android:ellipsize="end"
@@ -32,7 +34,7 @@
             android:maxLines="1" />
 
         <TextView
-            android:text="ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            android:text="jshfkjsadhfjlhsdljfhldjskahfjashfjkahjsdkhfjklsadhfkjahsdfjhsdkfhlskdfgdjfhgdjfshgjdfhgljdsflgjhdjlkghfjgkhdsfjklhgjdkhgjfdk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/describtion"
@@ -40,12 +42,11 @@
             android:textSize="@dimen/rss_element_tile_decribtion_size"
 
             android:maxLines="3"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:ellipsize="end"
+            android:layout_below="@+id/title"
             android:layout_alignLeft="@+id/title"
             android:layout_alignStart="@+id/title"
-            android:ellipsize="end" />
+            android:layout_marginTop="4dp" />
 
     </RelativeLayout>
 </LinearLayout>

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
@@ -19,9 +20,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 def AAVersion = '4.2.0'
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -42,4 +48,6 @@ dependencies {
     provided 'com.arello-mobile:moxy-compiler:1.4.3'
 
     compile 'com.facebook.fresco:fresco:1.0.0'
+
+
 }

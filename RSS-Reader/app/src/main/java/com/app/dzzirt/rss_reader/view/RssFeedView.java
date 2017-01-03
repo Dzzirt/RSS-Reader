@@ -11,4 +11,5 @@ import com.arellomobile.mvp.MvpView;
 
 public interface RssFeedView extends MvpView {
     void showRssItemInfo(RSSItem item);
+    void initFeedList(RecyclerView.Adapter adapter);
 }

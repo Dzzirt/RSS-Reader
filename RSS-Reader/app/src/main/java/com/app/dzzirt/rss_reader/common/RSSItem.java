@@ -36,11 +36,11 @@ public class RSSItem {
         this.m_autor = autor;
     }
 
-    public String getImageUrl() {
+    public String getImagePath() {
         return m_imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setImageUri(String imageUrl) {
         this.m_imageUrl = imageUrl;
     }
 

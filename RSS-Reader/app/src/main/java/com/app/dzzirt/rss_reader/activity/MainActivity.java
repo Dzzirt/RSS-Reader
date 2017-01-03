@@ -2,6 +2,7 @@ package com.app.dzzirt.rss_reader.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -26,30 +27,45 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView {
     protected Toolbar m_toolbar;
 
     @ViewById(R.id.feed_recyclerview)
-    protected RecyclerView m_recyclerView;
+    protected RecyclerView m_feedList;
 
     @InjectPresenter
-    RssFeedPresenter rssFeedPresenter;
+    RssFeedPresenter m_rssFeedPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    private void recyclerViewInit() {
-        m_recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        m_recyclerView.setAdapter(new RssItemAdapter());
-    }
 
     @AfterViews
     protected void init() {
         setSupportActionBar(m_toolbar);
-        recyclerViewInit();
-
+        m_rssFeedPresenter.onInjectFeedList();
     }
 
     @Override
     public void showRssItemInfo(RSSItem item) {
         //go to rss item preview activity
+        finish();
+    }
+
+    @Override
+    public void initFeedList(RecyclerView.Adapter adapter) {
+        setLayoutManagerByDeviceType();
+        m_feedList.setAdapter(adapter);
+    }
+
+    private void setLayoutManagerByDeviceType() {
+        if (getResources().getBoolean(R.bool.isTablet)) {
+            m_feedList.setLayoutManager(new LinearLayoutManager(this));
+        } else {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                    m_feedList.getContext(),
+                    linearLayoutManager.getOrientation());
+            m_feedList.setLayoutManager(linearLayoutManager);
+            m_feedList.addItemDecoration(dividerItemDecoration);
+        }
     }
 }
