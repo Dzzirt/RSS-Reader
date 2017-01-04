@@ -1,6 +1,6 @@
 package com.app.dzzirt.rss_reader.common;
 
-import com.app.dzzirt.rss_reader.Utils.DateUtils;
+import com.app.dzzirt.rss_reader.utils.DateUtils;
 import com.app.dzzirt.rss_reader.greendao.RssItem;
 import com.app.dzzirt.rss_reader.greendao.RssItemDao;
 
