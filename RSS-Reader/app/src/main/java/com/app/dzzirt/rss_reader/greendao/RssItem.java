@@ -3,31 +3,39 @@ package com.app.dzzirt.rss_reader.greendao;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.NotNull;
 
 /**
  * Created by Dzzirt on 01.01.2017.
  */
 
 @Entity
-public class RssElement {
+public class RssItem {
     @Id
     private long id;
 
-    private String imageUrl;
+    @NotNull
+    private String imageUrl = "";
 
-    private String title;
+    @NotNull
+    private String title = "";
 
-    private String describtion;
+    @NotNull
+    private String describtion = "";
 
-    private String pubDate;
+    @NotNull
+    private String pubDate = "";
 
-    private String autor;
+    @NotNull
+    private String autor = "";
 
-    private String guid;
+    @NotNull
+    private String guid = "";
 
-    @Generated(hash = 473979550)
-    public RssElement(long id, String imageUrl, String title, String describtion,
-            String pubDate, String autor, String guid) {
+    @Generated(hash = 261252799)
+    public RssItem(long id, @NotNull String imageUrl, @NotNull String title,
+            @NotNull String describtion, @NotNull String pubDate,
+            @NotNull String autor, @NotNull String guid) {
         this.id = id;
         this.imageUrl = imageUrl;
         this.title = title;
@@ -37,8 +45,8 @@ public class RssElement {
         this.guid = guid;
     }
 
-    @Generated(hash = 1986873412)
-    public RssElement() {
+    @Generated(hash = 2069234278)
+    public RssItem() {
     }
 
     public long getId() {

@@ -1,6 +1,6 @@
 package com.app.dzzirt.rss_reader.rssparser;
 
-import com.app.dzzirt.rss_reader.common.RSSItem;
+import com.app.dzzirt.rss_reader.greendao.RssItem;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -76,7 +76,7 @@ public class RSSParser {
         return attributesMap;
     }
 
-    public static List<RSSItem> parse(URL url) throws IOException {
+    public static List<RssItem> parse(URL url) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(
                         new ByteArrayInputStream(sample.getBytes(Charset.defaultCharset()))));

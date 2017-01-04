@@ -16,6 +16,7 @@
             android:layout_width="130dp"
             android:layout_height="130dp"
             fresco:placeholderImage="@mipmap/ic_launcher"
+            fresco:failureImage = "@mipmap/ic_launcher"
             android:background="@drawable/thumbnail_border" />
 
         <TextView
@@ -23,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/title"
-            android:textSize="@dimen/rss_element_tile_title_size"
+            android:textSize="@dimen/rss_item_tile_title_size"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/thumbnail"
             android:layout_toEndOf="@+id/thumbnail"
@@ -39,7 +40,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/describtion"
             android:textColor="?android:attr/textColorSecondary"
-            android:textSize="@dimen/rss_element_tile_decribtion_size"
+            android:textSize="@dimen/rss_item_tile_decribtion_size"
 
             android:maxLines="3"
             android:ellipsize="end"

@@ -2,16 +2,17 @@ package com.app.dzzirt.rss_reader.activity;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 
-import com.app.dzzirt.rss_reader.BuildConfig;
 import com.app.dzzirt.rss_reader.R;
-import com.app.dzzirt.rss_reader.common.RSSItem;
 import com.app.dzzirt.rss_reader.common.RssItemAdapter;
+import com.app.dzzirt.rss_reader.common.RssItemManager;
+import com.app.dzzirt.rss_reader.greendao.RssItem;
+import com.app.dzzirt.rss_reader.greendao.RssItemDao;
 import com.app.dzzirt.rss_reader.presenter.RssFeedPresenter;
 import com.app.dzzirt.rss_reader.view.RssFeedView;
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -21,6 +22,11 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @EActivity(R.layout.activity_main)
@@ -50,16 +56,11 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView {
         setSupportActionBar(m_toolbar);
         m_rssFeedPresenter.onInjectFeedList();
         m_swipeRefreshLayout.setColorSchemeResources(R.color.colorThumbnailBorder);
-        m_swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                m_rssFeedPresenter.onRefresh();
-            }
-        });
+        m_swipeRefreshLayout.setOnRefreshListener(() -> m_rssFeedPresenter.onRefresh());
     }
 
     @Override
-    public void showRssItemInfo(RSSItem item) {
+    public void showRssItemInfo(RssItem item) {
         //go to rss item preview activity
         finish();
     }
@@ -71,7 +72,7 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView {
     }
 
     @Override
-    public void updateFeedData(List<RSSItem> items) {
+    public void updateFeedData(List<RssItem> items) {
         RssItemAdapter adapter = (RssItemAdapter) m_feedList.getAdapter();
         adapter.clear();
         adapter.addAll(items);

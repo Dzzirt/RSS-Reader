@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.dzzirt.rss_reader.R;
+import com.app.dzzirt.rss_reader.greendao.RssItem;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -18,10 +19,10 @@ import java.util.List;
 
 public class RssItemAdapter extends RecyclerView.Adapter<RssItemAdapter.RssItemViewHolder> {
 
-    private List<RSSItem> m_items;
+    private List<RssItem> m_items;
     private OnItemClickListener m_onItemClickListener;
 
-    public RssItemAdapter(List<RSSItem> items) {
+    public RssItemAdapter(List<RssItem> items) {
         m_items = items;
     }
 
@@ -41,7 +42,7 @@ public class RssItemAdapter extends RecyclerView.Adapter<RssItemAdapter.RssItemV
         }
 
     }
-    
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         m_onItemClickListener = listener;
     }
@@ -51,25 +52,25 @@ public class RssItemAdapter extends RecyclerView.Adapter<RssItemAdapter.RssItemV
         notifyDataSetChanged();
     }
 
-    public void addAll(List<RSSItem> list) {
+    public void addAll(List<RssItem> list) {
         m_items.addAll(list);
         notifyDataSetChanged();
     }
 
     public RssItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rss_element, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rss_item, parent, false);
         return new RssItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RssItemViewHolder holder, int position) {
-        final RSSItem rssItem = m_items.get(position);
+        final RssItem rssItem = m_items.get(position);
         if (m_onItemClickListener != null) {
             holder.view.setOnClickListener(view -> m_onItemClickListener.onItemClick(rssItem));
         }
         holder.title.setText(rssItem.getTitle());
         holder.describtion.setText(rssItem.getDescribtion());
-        holder.thumbnail.setImageURI(Uri.parse(rssItem.getImagePath()));
+        holder.thumbnail.setImageURI(Uri.parse(""));
     }
 
     @Override
