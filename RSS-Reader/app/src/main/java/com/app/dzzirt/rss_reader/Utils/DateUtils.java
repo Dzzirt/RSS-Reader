@@ -1,4 +1,4 @@
-package com.app.dzzirt.rss_reader.Utils;
+package com.app.dzzirt.rss_reader.utils;
 
 import android.content.Context;
 

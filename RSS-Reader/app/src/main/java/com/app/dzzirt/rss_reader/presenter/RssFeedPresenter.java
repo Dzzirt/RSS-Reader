@@ -8,6 +8,8 @@ import com.app.dzzirt.rss_reader.view.RssFeedView;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
+import org.androidannotations.annotations.EBean;
+
 import java.util.List;
 
 /**
@@ -26,6 +28,7 @@ public class RssFeedPresenter extends MvpPresenter<RssFeedView> {
         getViewState().updateFeedData(getRssItemsList());
         getViewState().resetRefreshing();
     }
+
 
     private List<RssItem> getRssItemsList() {
         //get list from model
