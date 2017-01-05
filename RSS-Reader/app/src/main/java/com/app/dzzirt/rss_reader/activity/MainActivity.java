@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.widget.Toast;
 
 import com.app.dzzirt.rss_reader.R;
 import com.app.dzzirt.rss_reader.common.RssItemAdapter;
@@ -81,6 +82,11 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView {
     @Override
     public void resetRefreshing() {
         m_swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showErrorRefreshingMessage() {
+        Toast.makeText(this, R.string.refreshing_error, Toast.LENGTH_LONG).show();
     }
 
     private void setLayoutManagerByDeviceType() {

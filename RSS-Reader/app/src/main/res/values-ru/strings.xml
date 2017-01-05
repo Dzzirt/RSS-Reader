@@ -3,4 +3,5 @@
     <string name="app_name">RSS Reader</string>
     <string name="feed">Новостная лента</string>
     <string name="settings">Настройки</string>
+    <string name="refreshing_error">Ошибка обновления списка новостей</string>
 </resources>

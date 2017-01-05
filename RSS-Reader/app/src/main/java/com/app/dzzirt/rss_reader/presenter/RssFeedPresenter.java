@@ -3,12 +3,16 @@ package com.app.dzzirt.rss_reader.presenter;
 import com.app.dzzirt.rss_reader.activity.RssReaderApp;
 import com.app.dzzirt.rss_reader.common.RssItemManager;
 import com.app.dzzirt.rss_reader.common.RssItemAdapter;
+import com.app.dzzirt.rss_reader.event.OnUpdateFeedDataEvent;
 import com.app.dzzirt.rss_reader.greendao.RssItem;
+import com.app.dzzirt.rss_reader.model.RssFeedModel;
 import com.app.dzzirt.rss_reader.view.RssFeedView;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
 import org.androidannotations.annotations.EBean;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -24,8 +28,23 @@ public class RssFeedPresenter extends MvpPresenter<RssFeedView> {
         getViewState().initFeedList(rssItemAdapter);
     }
 
+    public RssFeedPresenter() {
+        super();
+        EventBus.getDefault().register(this);
+    }
+
     public void onRefresh() {
-        getViewState().updateFeedData(getRssItemsList());
+        RssFeedModel rssFeedModel = RssReaderApp.getRssFeedModel();
+        rssFeedModel.updateRssFeedData();
+    }
+
+    @Subscribe
+    public void onUpdateRssFeedData(OnUpdateFeedDataEvent event) {
+        if (event.isSuccessful) {
+            getViewState().updateFeedData(getRssItemsList());
+        } else {
+            getViewState().showErrorRefreshingMessage();
+        }
         getViewState().resetRefreshing();
     }
 
