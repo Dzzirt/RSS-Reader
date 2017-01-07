@@ -2,6 +2,7 @@ package com.app.dzzirt.rss_reader.common;
 
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,10 @@ import android.widget.TextView;
 
 import com.app.dzzirt.rss_reader.R;
 import com.app.dzzirt.rss_reader.greendao.RssItem;
+import com.app.dzzirt.rss_reader.utils.HtmlUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.jsoup.Jsoup;
 
 import java.util.List;
 
@@ -30,7 +34,7 @@ public class RssItemAdapter extends RecyclerView.Adapter<RssItemAdapter.RssItemV
 
         SimpleDraweeView thumbnail;
         TextView title;
-        TextView describtion;
+        TextView description;
         View view;
 
         RssItemViewHolder(View itemView) {
@@ -38,7 +42,7 @@ public class RssItemAdapter extends RecyclerView.Adapter<RssItemAdapter.RssItemV
             view = itemView;
             thumbnail = (SimpleDraweeView) itemView.findViewById(R.id.thumbnail);
             title = (TextView) itemView.findViewById(R.id.title);
-            describtion = (TextView) itemView.findViewById(R.id.describtion);
+            description = (TextView) itemView.findViewById(R.id.description);
         }
 
     }
@@ -69,8 +73,8 @@ public class RssItemAdapter extends RecyclerView.Adapter<RssItemAdapter.RssItemV
             holder.view.setOnClickListener(view -> m_onItemClickListener.onItemClick(rssItem));
         }
         holder.title.setText(rssItem.getTitle());
-        holder.describtion.setText(rssItem.getDescribtion());
-        holder.thumbnail.setImageURI(Uri.parse(""));
+        holder.description.setText(rssItem.getDescription());
+        holder.thumbnail.setImageURI(rssItem.getImageUrl());
     }
 
     @Override

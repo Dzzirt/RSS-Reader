@@ -11,8 +11,9 @@ import org.greenrobot.greendao.annotation.NotNull;
 
 @Entity
 public class RssItem {
-    @Id
-    private long id;
+
+    @Id(autoincrement = true)
+    private Long id;
 
     @NotNull
     private String imageUrl = "";
@@ -21,7 +22,7 @@ public class RssItem {
     private String title = "";
 
     @NotNull
-    private String describtion = "";
+    private String description = "";
 
     @NotNull
     private String pubDate = "";
@@ -32,28 +33,32 @@ public class RssItem {
     @NotNull
     private String guid = "";
 
-    @Generated(hash = 261252799)
-    public RssItem(long id, @NotNull String imageUrl, @NotNull String title,
-            @NotNull String describtion, @NotNull String pubDate,
-            @NotNull String autor, @NotNull String guid) {
+    @NotNull
+    private String link = "";
+
+    @Generated(hash = 1962356016)
+    public RssItem(Long id, @NotNull String imageUrl, @NotNull String title,
+            @NotNull String description, @NotNull String pubDate,
+            @NotNull String autor, @NotNull String guid, @NotNull String link) {
         this.id = id;
         this.imageUrl = imageUrl;
         this.title = title;
-        this.describtion = describtion;
+        this.description = description;
         this.pubDate = pubDate;
         this.autor = autor;
         this.guid = guid;
+        this.link = link;
     }
 
     @Generated(hash = 2069234278)
     public RssItem() {
     }
 
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -73,12 +78,12 @@ public class RssItem {
         this.title = title;
     }
 
-    public String getDescribtion() {
-        return this.describtion;
+    public String getDescription() {
+        return this.description;
     }
 
-    public void setDescribtion(String describtion) {
-        this.describtion = describtion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPubDate() {
@@ -104,6 +109,13 @@ public class RssItem {
     public void setGuid(String guid) {
         this.guid = guid;
     }
-    
 
+    public String getLink() {
+        return this.link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+    
 }

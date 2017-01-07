@@ -24,6 +24,10 @@ public class RssItemManager {
         return m_itemDao.loadAll();
     }
 
+    public void deleteAll() {
+        m_itemDao.deleteAll();
+    }
+
     public void insertAllWithUpdate(List<RssItem> RssItems) {
         for (RssItem updatingItem : RssItems) {
             RssItem updatedItem = m_itemDao.queryBuilder()
@@ -31,9 +35,7 @@ public class RssItemManager {
                     .unique();
             if (updatedItem != null) {
                 try {
-                    if (isDateGreaterThan(updatingItem.getPubDate(), updatedItem.getPubDate())
-                            || !isEquals(updatingItem.getGuid(), updatedItem.getGuid())
-                            || !isEquals(updatingItem.getDescribtion(), updatedItem.getDescribtion())) {
+                    if (isDateGreaterThan(updatingItem.getPubDate(), updatedItem.getPubDate())) {
                         updatingItem.setId(updatedItem.getId());
                         m_itemDao.update(updatingItem);
                     }
@@ -44,31 +46,27 @@ public class RssItemManager {
         }
     }
 
-    private boolean isEquals(String lhs, String rhs) {
-        return (lhs != null && rhs != null) && lhs.equals(rhs);
-    }
-
     private boolean isItemValid(RssItem item) {
-        if (!item.getDescribtion().isEmpty() || !item.getTitle().isEmpty()) {
-            if (!item.getPubDate().isEmpty()) {
-                try {
-                    DateUtils.parseRssDate(item.getPubDate());
-                } catch (ParseException e) {
-                    return false;
-                }
-            }
-            return true;
+        if (item.getTitle().isEmpty() || item.getLink().isEmpty()) {
+            return false;
         }
-        return false;
+        if (!item.getPubDate().isEmpty()) {
+            try {
+                DateUtils.parseRssDate(item.getPubDate());
+            } catch (ParseException e) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean isDateGreaterThan(String lhsDateString, String rhsDateString) throws ParseException {
         if (lhsDateString != null && rhsDateString != null) {
-                Date lhsDate = DateUtils.parseRssDate(lhsDateString);
-                Date rhsDate = DateUtils.parseRssDate(rhsDateString);
-                if (lhsDate.after(rhsDate)) {
-                    return true;
-                }
+            Date lhsDate = DateUtils.parseRssDate(lhsDateString);
+            Date rhsDate = DateUtils.parseRssDate(rhsDateString);
+            if (lhsDate.after(rhsDate)) {
+                return true;
+            }
         }
         return false;
     }
