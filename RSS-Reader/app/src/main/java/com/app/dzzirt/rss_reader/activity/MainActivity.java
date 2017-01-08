@@ -30,6 +30,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
@@ -75,6 +76,9 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView, R
 
     @InjectPresenter
     RssItemInfoPresenter m_rssItemInfoPresenter;
+
+    private String m_itemLink;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +137,12 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView, R
         Toast.makeText(this, messageId, Toast.LENGTH_LONG).show();
     }
 
+    @Click(R.id.view_button)
+    void onViewButtonClick() {
+        WebViewActivity_.intent(this).extra("link", m_itemLink).start();
+        m_itemInfoDrawer.closeDrawers();
+    }
+
     public boolean ensureNetworkConnection() {
         if (NetUtils.isNetworkConnected(this)) {
             return true;
@@ -175,6 +185,7 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView, R
             m_drawerTitle.setText(rssItem.getTitle());
             m_drawerDescription.setText(rssItem.getDescription());
             m_drawerAuthor.setText(rssItem.getAutor());
+            m_itemLink = rssItem.getLink();
             try {
                 m_drawerDate.setText(
                         DateUtils.formatToRegionalDate(

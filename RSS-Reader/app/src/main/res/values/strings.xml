@@ -12,4 +12,5 @@
     <string name="rss_input_msg">Input RSS channel address</string>
     <string name="preview">Preview</string>
     <string name="save">Save</string>
+    <string name="browser">Browser</string>
 </resources>

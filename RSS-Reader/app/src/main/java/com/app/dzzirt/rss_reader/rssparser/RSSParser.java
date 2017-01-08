@@ -34,43 +34,12 @@ public class RssParser {
 
     private static boolean m_isInItemTag = false;
 
-    private static String sample = "<?xml version=\"1.0\" encoding=\"utf-8\" ?> <rss version=\"2.0\" xml:base=\"http://rusvesna.su/\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:yandex=\"http://news.yandex.ru\" xmlns:media=\"http://search.yahoo.com/mrss/\"> " +
-            "<channel> " +
-            "<title>kek весна</title>" +
-            " <description>Русская весна</description>" +
-            " <link>http://rusvesna.su/</link>" +
-            " <atom:link rel=\"self\" href=\"http://rusvesna.su/rss.xml\" />\n" +
-            " <language>ru-ru</language>" +
-            " <pubDate>Fri, 06 Jan 2017 12:11:58 +0300</pubDate>" +
-            " <lastBuildDate>Fri, 06 Jan 2017 12:28:09 +0300</lastBuildDate>" +
-                " <item> " +
-                    "<title>vcdgfdfg авыафа</title>" +
-                    " <link>http://rusvesna.su/news/1483693918<kek></kek></link>" +
-                    " <description>Минобороны РФ приступило к сокращению группировки Вооруженных сил в САР.</description>" +
-                    " <category>Новости</category>" +
-                    " <enclosure url=\"http://rusvesna.su/sites/default/files/styles/top_news/public/admiral_kuznecov_avianosec.jpg?itok=z0HAOFRv\" length=\"5793\" type=\"image/jpeg\" />" +
-                    " <guid isPermaLink=\"false\">http://rusvesna.su/news/1483693918</guid>" +
-                    " <pubDate>Fri, 06 Jan 2017 12:11:58 +0300</pubDate>" +
-                    " <source url=\"http://rusvesna.su/rss.xml\">Русская весна</source>" +
-                "</item>" +
-            " <item> <title>Трамп подарит мексиканцам стену на деньги США</title>" +
-            " <link>http://rusvesna.su/news/1483692808</link>" +
-            " <description>Избранный президент США отказался от идеи отгородиться стеной от Мексики за ее счет, сообщают СМИ.</description>\n" +
-            " <category>Новости</category>" +
-            " <enclosure url=\"http://rusvesna.su/sites/default/files/styles/top_news/public/tramp_31.jpg?itok=CnWMKivD\" length=\"6049\" type=\"image/jpeg\" />\n" +
-            " <guid isPermaLink=\"false\">http://rusvesna.su/news/1483692808</guid>" +
-            " <pubDate>Fri, 06 Jan 2017 11:53:28 +0300</pubDate>" +
-            " <source url=\"http://rusvesna.su/rss.xml\">Русская весна</source>" +
-            "</item>";
-
-    public static List<RssItem> parse(InputStream inputStream) {
+    public static List<RssItem> parse(InputStream inputStream) throws IOException, XmlPullParserException {
         ArrayList<RssItem> list = new ArrayList<>();
         InputStreamReader reader = null;
-
         try {
             XmlPullParser parser = Xml.newPullParser();
             reader = new InputStreamReader(inputStream);
-//            reader = new InputStreamReader(new ByteArrayInputStream(sample.getBytes(Charset.forName("UTF-8"))));
             parser.setInput(reader);
             RssItem tempItem = null;
             while (parser.getEventType() != XmlPullParser.END_DOCUMENT) {
@@ -116,11 +85,8 @@ public class RssParser {
                         }
                     }
                 }
-
-
             }
-        } catch (XmlPullParserException | IOException e) {
-            list.clear();
+        } finally {
             if (reader != null) {
                 try {
                     reader.close();
@@ -159,4 +125,5 @@ public class RssParser {
         }
         return result;
     }
+
 }

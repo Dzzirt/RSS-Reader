@@ -45,24 +45,26 @@ public class RssItemInfoActivity extends AppCompatActivity {
     @ViewById(R.id.info_date)
     TextView m_date;
 
+    private RssItem m_rssItem;
+
     @AfterViews
     void init() {
         initToolbar();
-        RssItem rssItem = RssReaderApp.getRssItemManager().getRssItemById(rssItemId);
-        m_thumbnail.setImageURI(rssItem.getImageUrl());
-        m_title.setText(rssItem.getTitle());
-        m_description.setText(rssItem.getDescription());
-        m_author.setText(rssItem.getAutor());
+        m_rssItem = RssReaderApp.getRssItemManager().getRssItemById(rssItemId);
+        m_thumbnail.setImageURI(m_rssItem.getImageUrl());
+        m_title.setText(m_rssItem.getTitle());
+        m_description.setText(m_rssItem.getDescription());
+        m_author.setText(m_rssItem.getAutor());
         try {
             m_date.setText(
                     DateUtils.formatToRegionalDate(
-                            DateUtils.parseRssDate(rssItem.getPubDate()), this));
+                            DateUtils.parseRssDate(m_rssItem.getPubDate()), this));
         } catch (ParseException ignored) {}
     }
 
     @Click(R.id.view_button)
     void onViewButtonClick() {
-        // show webview activity
+        WebViewActivity_.intent(this).extra("link", m_rssItem.getLink()).start();
     }
 
     private void initToolbar() {

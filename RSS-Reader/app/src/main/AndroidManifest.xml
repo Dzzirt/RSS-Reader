@@ -23,10 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.RssItemInfoActivity_">
-        </activity>
-        <activity android:name=".activity.SettingsActivity_">
-        </activity>
+        <activity android:name=".activity.RssItemInfoActivity_" android:noHistory="true"/>
+        <activity android:name=".activity.SettingsActivity_"/>
+        <activity android:name=".activity.WebViewActivity_"/>
     </application>
 
 </manifest>
