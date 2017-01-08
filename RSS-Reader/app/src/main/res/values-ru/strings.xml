@@ -3,10 +3,14 @@
     <string name="app_name">RSS Reader</string>
     <string name="feed">Новостная лента</string>
     <string name="settings">Настройки</string>
-    <string name="refreshing_error">Ошибка обновления списка новостей</string>
     <string name="title">Заголовок:</string>
     <string name="description">Описание:</string>
     <string name="author">Автор:</string>
     <string name="pub_date">Дата публикации:</string>
     <string name="view_full">Посмотреть полностью</string>
+    <string name="internet_connection_error">Ошибка: Пожалуйста, проверьте подключение к сети</string>
+    <string name="invalid_rss_error">\"Ошибка: Пожалуйста, проверьте правильность введенного адреса RSS канала\"</string>
+    <string name="rss_input_msg">Введите адрес RSS канала</string>
+    <string name="preview">Предпросмотр</string>
+    <string name="save">Сохранить</string>
 </resources>

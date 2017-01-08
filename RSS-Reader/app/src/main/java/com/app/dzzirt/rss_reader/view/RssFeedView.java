@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.app.dzzirt.rss_reader.greendao.RssItem;
 import com.arellomobile.mvp.MvpView;
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 import java.util.List;
 
@@ -12,9 +14,13 @@ import java.util.List;
  */
 
 public interface RssFeedView extends MvpView {
-    void showRssItemInfo(RssItem item);
-    void initFeedList(RecyclerView.Adapter adapter);
+
+    @StateStrategyType(value = SkipStrategy.class)
     void updateFeedData(List<RssItem> items);
+
+    @StateStrategyType(value = SkipStrategy.class)
     void resetRefreshing();
-    void showErrorRefreshingMessage();
+
+    @StateStrategyType(value = SkipStrategy.class)
+    void showErrorRefreshingMessage(int messageId);
 }

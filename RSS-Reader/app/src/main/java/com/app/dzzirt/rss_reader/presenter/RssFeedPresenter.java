@@ -1,5 +1,6 @@
 package com.app.dzzirt.rss_reader.presenter;
 
+import com.app.dzzirt.rss_reader.R;
 import com.app.dzzirt.rss_reader.activity.RssReaderApp;
 import com.app.dzzirt.rss_reader.common.RssItemManager;
 import com.app.dzzirt.rss_reader.common.RssItemAdapter;
@@ -22,28 +23,29 @@ import java.util.List;
 
 @InjectViewState
 public class RssFeedPresenter extends MvpPresenter<RssFeedView> {
-    public void onInjectFeedList() {
-        RssItemAdapter rssItemAdapter = new RssItemAdapter(getRssItemsList());
-        rssItemAdapter.setOnItemClickListener(item -> getViewState().showRssItemInfo(item));
-        getViewState().initFeedList(rssItemAdapter);
-    }
 
     public RssFeedPresenter() {
         super();
         EventBus.getDefault().register(this);
     }
 
-    public void onRefresh() {
+    public void onRefresh(String rssUrl) {
         RssFeedModel rssFeedModel = RssReaderApp.getRssFeedModel();
-        rssFeedModel.updateRssFeedData();
+        rssFeedModel.updateRssFeedData(rssUrl);
     }
 
     @Subscribe
     public void onUpdateRssFeedData(OnUpdateFeedDataEvent event) {
-        if (event.isSuccessful) {
-            getViewState().updateFeedData(getRssItemsList());
-        } else {
-            getViewState().showErrorRefreshingMessage();
+        switch (event.result) {
+            case OK:
+                getViewState().updateFeedData(getRssItemsList());
+                break;
+            case DOWNLOAD_ERROR:
+                getViewState().showErrorRefreshingMessage(R.string.internet_connection_error);
+                break;
+            case INVALID_RSS_ERROR:
+                getViewState().showErrorRefreshingMessage(R.string.invalid_rss_error);
+                break;
         }
         getViewState().resetRefreshing();
     }

@@ -1,5 +1,8 @@
 package com.app.dzzirt.rss_reader.utils;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,7 +18,7 @@ import java.net.URLConnection;
  */
 
 public class NetUtils {
-    public static boolean download(OutputStream outputStream, String source, int timeout) {
+    public static boolean download(OutputStream outputStream, String source, int timeout) throws IOException {
         InputStream inputStream = null;
         try {
             URL url = new URL(source);
@@ -29,8 +32,6 @@ public class NetUtils {
             {
                 outputStream.write(buffer, 0, bufferLength);
             }
-        } catch (IOException e) {
-            return false;
         } finally {
             try {
                 outputStream.close();
@@ -47,5 +48,10 @@ public class NetUtils {
 
         }
         return true;
+    }
+
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 }

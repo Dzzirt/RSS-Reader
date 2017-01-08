@@ -1,6 +1,7 @@
 package com.app.dzzirt.rss_reader.activity;
 
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.app.dzzirt.rss_reader.R;
@@ -20,11 +21,14 @@ import java.text.ParseException;
 /**
  * Created by Dzzirt on 07.01.2017.
  */
-@EActivity(R.layout.rss_item_info)
+@EActivity(R.layout.rss_item_info_activity)
 public class RssItemInfoActivity extends AppCompatActivity {
 
     @Extra
     Long rssItemId;
+
+    @ViewById(R.id.info_toolbar)
+    Toolbar m_toolbar;
 
     @ViewById(R.id.info_thumbnail)
     SimpleDraweeView m_thumbnail;
@@ -43,6 +47,7 @@ public class RssItemInfoActivity extends AppCompatActivity {
 
     @AfterViews
     void init() {
+        initToolbar();
         RssItem rssItem = RssReaderApp.getRssItemManager().getRssItemById(rssItemId);
         m_thumbnail.setImageURI(rssItem.getImageUrl());
         m_title.setText(rssItem.getTitle());
@@ -58,5 +63,10 @@ public class RssItemInfoActivity extends AppCompatActivity {
     @Click(R.id.view_button)
     void onViewButtonClick() {
         // show webview activity
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(m_toolbar);
+        m_toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 }

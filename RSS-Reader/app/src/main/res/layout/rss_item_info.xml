@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/info_author"
                 android:layout_marginTop="10dp"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:maxWidth="150dp"
                 android:layout_alignLeft="@+id/info_description"
                 android:layout_alignStart="@+id/info_description"

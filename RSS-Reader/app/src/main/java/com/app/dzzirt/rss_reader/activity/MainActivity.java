@@ -1,5 +1,7 @@
 package com.app.dzzirt.rss_reader.activity;
 
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,7 @@ import com.app.dzzirt.rss_reader.greendao.RssItem;
 import com.app.dzzirt.rss_reader.presenter.RssFeedPresenter;
 import com.app.dzzirt.rss_reader.presenter.RssItemInfoPresenter;
 import com.app.dzzirt.rss_reader.utils.DateUtils;
+import com.app.dzzirt.rss_reader.utils.NetUtils;
 import com.app.dzzirt.rss_reader.utils.ViewUtils;
 import com.app.dzzirt.rss_reader.view.RssFeedView;
 import com.app.dzzirt.rss_reader.view.RssItemInfoView;
@@ -27,12 +31,16 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
 
 import java.text.ParseException;
 import java.util.List;
 
 @EActivity(R.layout.activity_main)
+@OptionsMenu(R.menu.menu_activity_main)
 public class MainActivity extends MvpAppCompatActivity implements RssFeedView, RssItemInfoView {
 
     @ViewById(R.id.feed_toolbar)
@@ -73,14 +81,32 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView, R
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+    @OptionsItem(R.id.action_settings)
+    public void onActionSettingsSelected() {
+        SettingsActivity_.intent(this).start();
+    }
 
     @AfterViews
     protected void init() {
         setSupportActionBar(m_toolbar);
-        m_rssFeedPresenter.onInjectFeedList();
         initFeedList();
         m_swipeRefreshLayout.setColorSchemeResources(R.color.colorThumbnailBorder);
-        m_swipeRefreshLayout.setOnRefreshListener(() -> m_rssFeedPresenter.onRefresh());
+        m_swipeRefreshLayout.setOnRefreshListener(() -> {
+            if (ensureNetworkConnection()) {
+                m_rssFeedPresenter.onRefresh(getRssUrl());
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        m_feedList.getAdapter().notifyDataSetChanged();
     }
 
     private void initFeedList() {
@@ -88,17 +114,6 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView, R
         RssItemAdapter adapter = new RssItemAdapter(RssReaderApp.getRssItemManager().getAll());
         adapter.setOnItemClickListener(item -> m_rssItemInfoPresenter.onRssItemClick(item.getId()));
         m_feedList.setAdapter(adapter);
-    }
-
-    @Override
-    public void showRssItemInfo(RssItem item) {
-        //go to rss item preview activity
-        RssItemInfoActivity_.intent(this).start();
-    }
-
-    @Override
-    public void initFeedList(RecyclerView.Adapter adapter) {
-
     }
 
     @Override
@@ -114,8 +129,21 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView, R
     }
 
     @Override
-    public void showErrorRefreshingMessage() {
-        Toast.makeText(this, R.string.refreshing_error, Toast.LENGTH_LONG).show();
+    public void showErrorRefreshingMessage(int messageId) {
+        Toast.makeText(this, messageId, Toast.LENGTH_LONG).show();
+    }
+
+    public boolean ensureNetworkConnection() {
+        if (NetUtils.isNetworkConnected(this)) {
+            return true;
+        }
+        Toast.makeText(this, R.string.internet_connection_error, Toast.LENGTH_LONG).show();
+        return false;
+    }
+
+    public String getRssUrl() {
+        SharedPreferences settingsPrefs = getSharedPreferences(SettingsActivity.SETTINGS_PREFS, MODE_PRIVATE);
+        return settingsPrefs.getString(SettingsActivity.URL_KEY, "");
     }
 
     private void setLayoutManagerByDeviceType() {
