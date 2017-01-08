@@ -16,6 +16,5 @@ public interface RssFeedView extends MvpView {
     void initFeedList(RecyclerView.Adapter adapter);
     void updateFeedData(List<RssItem> items);
     void resetRefreshing();
-
     void showErrorRefreshingMessage();
 }

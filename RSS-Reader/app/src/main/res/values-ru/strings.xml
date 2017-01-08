@@ -4,4 +4,9 @@
     <string name="feed">Новостная лента</string>
     <string name="settings">Настройки</string>
     <string name="refreshing_error">Ошибка обновления списка новостей</string>
+    <string name="title">Заголовок:</string>
+    <string name="description">Описание:</string>
+    <string name="author">Автор:</string>
+    <string name="pub_date">Дата публикации:</string>
+    <string name="view_full">Посмотреть полностью</string>
 </resources>

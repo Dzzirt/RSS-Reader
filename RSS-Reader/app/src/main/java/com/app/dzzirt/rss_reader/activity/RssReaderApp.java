@@ -6,6 +6,7 @@ import com.app.dzzirt.rss_reader.common.FileManager;
 import com.app.dzzirt.rss_reader.common.RssItemManager;
 import com.app.dzzirt.rss_reader.greendao.DaoMaster;
 import com.app.dzzirt.rss_reader.greendao.DaoSession;
+import com.app.dzzirt.rss_reader.greendao.RssItem;
 import com.app.dzzirt.rss_reader.greendao.UpgradingDatabaseOpenHelper;
 import com.app.dzzirt.rss_reader.model.RssFeedModel;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -32,6 +33,7 @@ public class RssReaderApp extends Application {
         m_fileManager = new FileManager(this);
         m_rssFeedModel = new RssFeedModel();
     }
+
 
     public static DaoSession getGlobalSession() {
         return m_globalSession;

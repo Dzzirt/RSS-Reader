@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <bool name="isTablet">true</bool>
+    <dimen name="rss_item_table_view_width">200dp</dimen>
+    <dimen name="rss_item_table_view_height">200dp</dimen>
+    <dimen name="rss_item_offset">50dp</dimen>
 </resources>

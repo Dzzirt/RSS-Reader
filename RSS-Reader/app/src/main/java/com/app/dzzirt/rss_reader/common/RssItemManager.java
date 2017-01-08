@@ -28,6 +28,10 @@ public class RssItemManager {
         m_itemDao.deleteAll();
     }
 
+    public RssItem getRssItemById(Long id) {
+        return m_itemDao.queryBuilder().where(RssItemDao.Properties.Id.eq(id)).unique();
+    }
+
     public void insertAllWithUpdate(List<RssItem> RssItems) {
         for (RssItem updatingItem : RssItems) {
             RssItem updatedItem = m_itemDao.queryBuilder()

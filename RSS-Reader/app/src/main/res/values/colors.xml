@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorActionBar">#f7991f</color>
     <color name="colorThumbnailBorder">#f7991f</color>
+    <color name="colorRssItemTabletBackground">#ffffff</color>
+    <color name="colorRssItemTabletBackgroundShadow">#14000000</color>
 </resources>
