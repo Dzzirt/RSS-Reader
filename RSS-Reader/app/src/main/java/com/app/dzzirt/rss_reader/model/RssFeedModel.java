@@ -33,7 +33,7 @@ public class RssFeedModel {
             private RefreshingResult result;
 
             @Override
-            protected Void doInBackground(Void... voids) {
+            protected Void doInBackground(Void... voids) { //simple algorithm: download -> parse -> fill database
                 try {
                     RssItemManager rssItemManager = RssReaderApp.getRssItemManager();
                     File tempXml = getEmptyTempFile();
@@ -42,7 +42,7 @@ public class RssFeedModel {
                             rssUrl,
                             DOWNLOAD_TIMEOUT);
                     List<RssItem> rssItems = RssParser.parse(new FileInputStream(tempXml));
-                    deleteHtmlTags(rssItems);
+                    deleteHtmlTags(rssItems); //delete html tags from rss item if any
                     rssItemManager.insertAllWithUpdate(rssItems);
                     result = RefreshingResult.OK;
                 } catch (IOException | XmlPullParserException e) {

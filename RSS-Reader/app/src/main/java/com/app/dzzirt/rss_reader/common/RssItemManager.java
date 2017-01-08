@@ -34,11 +34,11 @@ public class RssItemManager {
 
     public void insertAllWithUpdate(List<RssItem> RssItems) {
         for (RssItem updatingItem : RssItems) {
-            RssItem updatedItem = m_itemDao.queryBuilder()
+            RssItem updatedItem = m_itemDao.queryBuilder() //get existing item with id if any
                     .where(RssItemDao.Properties.Title.eq(updatingItem.getTitle()))
                     .unique();
             if (updatedItem != null) {
-                try {
+                try { // updating by pub date only
                     if (isDateGreaterThan(updatingItem.getPubDate(), updatedItem.getPubDate())) {
                         updatingItem.setId(updatedItem.getId());
                         m_itemDao.update(updatingItem);
@@ -50,6 +50,7 @@ public class RssItemManager {
         }
     }
 
+    //rss item is valid if it have title, description and correct publish date
     private boolean isItemValid(RssItem item) {
         if (item.getTitle().isEmpty() || item.getLink().isEmpty()) {
             return false;
