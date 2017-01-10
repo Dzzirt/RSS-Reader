@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,10 +33,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
-import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
 
-import java.text.ParseException;
 import java.util.List;
 
 @EActivity(R.layout.activity_main)
@@ -115,7 +112,7 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView, R
 
     private void initFeedList() {
         setLayoutManagerByDeviceType();
-        RssItemAdapter adapter = new RssItemAdapter(RssReaderApp.getRssItemManager().getAll());
+        RssItemAdapter adapter = new RssItemAdapter(RssReaderApp.getRssItemManager().getAll(true));
         adapter.setOnItemClickListener(item -> m_rssItemInfoPresenter.onRssItemClick(item.getId()));
         m_feedList.setAdapter(adapter);
     }
@@ -186,13 +183,8 @@ public class MainActivity extends MvpAppCompatActivity implements RssFeedView, R
             m_drawerDescription.setText(rssItem.getDescription());
             m_drawerAuthor.setText(rssItem.getAutor());
             m_itemLink = rssItem.getLink();
-            try {
-                m_drawerDate.setText(
-                        DateUtils.formatToRegionalDate(
-                                DateUtils.parseRssDate(rssItem.getPubDate()), this));
-            } catch (ParseException ignored) {}
+            m_drawerDate.setText(DateUtils.asRegionalDateString(rssItem.getPubDate(), this));
             m_itemInfoDrawer.openDrawer(Gravity.RIGHT);
-
         } else {
             RssItemInfoActivity_.intent(this).extra("rssItemId", rssItemId).start();
         }

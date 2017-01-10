@@ -5,6 +5,9 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.NotNull;
 
+import java.util.Date;
+
+
 /**
  * Created by Dzzirt on 01.01.2017.
  */
@@ -24,8 +27,7 @@ public class RssItem {
     @NotNull
     private String description = "";
 
-    @NotNull
-    private String pubDate = "";
+    private Date pubDate;
 
     @NotNull
     private String autor = "";
@@ -36,10 +38,10 @@ public class RssItem {
     @NotNull
     private String link = "";
 
-    @Generated(hash = 1962356016)
+    @Generated(hash = 1387689024)
     public RssItem(Long id, @NotNull String imageUrl, @NotNull String title,
-            @NotNull String description, @NotNull String pubDate,
-            @NotNull String autor, @NotNull String guid, @NotNull String link) {
+            @NotNull String description, Date pubDate, @NotNull String autor,
+            @NotNull String guid, @NotNull String link) {
         this.id = id;
         this.imageUrl = imageUrl;
         this.title = title;
@@ -86,11 +88,11 @@ public class RssItem {
         this.description = description;
     }
 
-    public String getPubDate() {
+    public Date getPubDate() {
         return this.pubDate;
     }
 
-    public void setPubDate(String pubDate) {
+    public void setPubDate(Date pubDate) {
         this.pubDate = pubDate;
     }
 

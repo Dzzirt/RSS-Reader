@@ -29,7 +29,7 @@ public class DateUtils {
         return output;
     }
 
-    public static String formatToRegionalDate(Date date, Context context) {
+    public static String asRegionalDateString(Date date, Context context) {
         DateFormat dateFormat = android.text.format.DateFormat.getLongDateFormat(context);
         DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(context);
         return dateFormat.format(date) + " " + timeFormat.format(date);

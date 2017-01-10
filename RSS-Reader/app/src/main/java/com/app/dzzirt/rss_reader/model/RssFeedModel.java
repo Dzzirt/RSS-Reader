@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -45,7 +46,7 @@ public class RssFeedModel {
                     deleteHtmlTags(rssItems); //delete html tags from rss item if any
                     rssItemManager.insertAllWithUpdate(rssItems);
                     result = RefreshingResult.OK;
-                } catch (IOException | XmlPullParserException e) {
+                } catch (IOException | XmlPullParserException | ParseException e) {
                     result = RefreshingResult.INVALID_RSS_ERROR;
                 }
                 return null;

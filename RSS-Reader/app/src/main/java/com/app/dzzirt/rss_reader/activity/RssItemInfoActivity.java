@@ -14,9 +14,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
-import org.jsoup.helper.DataUtil;
-
-import java.text.ParseException;
 
 /**
  * Created by Dzzirt on 07.01.2017.
@@ -55,11 +52,7 @@ public class RssItemInfoActivity extends AppCompatActivity {
         m_title.setText(m_rssItem.getTitle());
         m_description.setText(m_rssItem.getDescription());
         m_author.setText(m_rssItem.getAutor());
-        try {
-            m_date.setText(
-                    DateUtils.formatToRegionalDate(
-                            DateUtils.parseRssDate(m_rssItem.getPubDate()), this));
-        } catch (ParseException ignored) {}
+        m_date.setText(DateUtils.asRegionalDateString(m_rssItem.getPubDate(), this));
     }
 
     @Click(R.id.view_button)

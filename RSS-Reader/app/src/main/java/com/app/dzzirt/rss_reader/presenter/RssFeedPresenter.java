@@ -54,6 +54,6 @@ public class RssFeedPresenter extends MvpPresenter<RssFeedView> {
     private List<RssItem> getRssItemsList() {
         //get list from model
         RssItemManager RssItemManager = RssReaderApp.getRssItemManager();
-        return RssItemManager.getAll();
+        return RssItemManager.getAll(true);
     }
 }

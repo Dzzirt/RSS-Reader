@@ -3,6 +3,7 @@ package com.app.dzzirt.rss_reader.rssparser;
 import android.util.Xml;
 
 import com.app.dzzirt.rss_reader.greendao.RssItem;
+import com.app.dzzirt.rss_reader.utils.DateUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +35,10 @@ public class RssParser {
     private static final int MAX_DEPTH = 4;
 
     private static boolean m_isInItemTag = false;
-
-    public static List<RssItem> parse(InputStream inputStream) throws IOException, XmlPullParserException {
+    //Parser includes rss structure validation, but not values validation
+    public static List<RssItem> parse(InputStream inputStream) throws IOException
+            , XmlPullParserException
+            , ParseException {
         ArrayList<RssItem> list = new ArrayList<>();
         InputStreamReader reader = null;
         try {
@@ -49,14 +53,14 @@ public class RssParser {
                     if (tag.equals(ITEM) && isValidItemTag(parser)) {
                         if (parser.getEventType() == XmlPullParser.START_TAG) {
                             m_isInItemTag = true;
-                            tempItem = new RssItem();
+                            tempItem = new RssItem(); // creating temp item when we just enter <item>
                         } else {
-                            list.add(tempItem);
+                            list.add(tempItem); // adding temp item to list when we on </item> tag
                             m_isInItemTag = false;
                         }
-                    } else if (m_isInItemTag
-                            && parser.getEventType() != XmlPullParser.END_TAG
-                            && parser.getDepth() <= MAX_DEPTH) {
+                    } else if (m_isInItemTag //parsed tag should be in <item></item>
+                            && parser.getEventType() != XmlPullParser.END_TAG //skip closing tags
+                            && parser.getDepth() <= MAX_DEPTH) { // skip deep nested tags (Idiot Protection)
                         switch (tag) {
                             case TITLE:
                                 tempItem.setTitle(readText(parser));
@@ -69,12 +73,13 @@ public class RssParser {
                                 break;
                             case ENCLOSURE:
                                 String url = readImageUrl(parser);
-                                if (!url.isEmpty()) {
+                                if (!url.isEmpty()) { // We get img from last <enclosure>
                                     tempItem.setImageUrl(url);
                                 }
                                 break;
                             case PUBDATE:
-                                tempItem.setPubDate(readText(parser));
+                                String pubdate = readText(parser);
+                                tempItem.setPubDate(DateUtils.parseRssDate(pubdate));
                                 break;
                             case LINK:
                                 tempItem.setLink(readText(parser));
@@ -97,7 +102,7 @@ public class RssParser {
         }
         return list;
     }
-
+    //Protection from nested <item></item> (Idiot Protection!)
     private static boolean isValidItemTag(XmlPullParser parser) throws XmlPullParserException {
         if (parser.getEventType() == XmlPullParser.START_TAG) {
             return !m_isInItemTag;
@@ -107,6 +112,7 @@ public class RssParser {
         return false;
     }
 
+    //Parsing img url
     private static String readImageUrl(XmlPullParser parser) {
         String result = "";
         int attributeCount = parser.getAttributeCount();
