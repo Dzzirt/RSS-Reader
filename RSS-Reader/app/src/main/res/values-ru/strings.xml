@@ -7,10 +7,10 @@
     <string name="description">Описание:</string>
     <string name="author">Автор:</string>
     <string name="pub_date">Дата публикации:</string>
-    <string name="view_full">Посмотреть полностью</string>
-    <string name="internet_connection_error">Ошибка: Пожалуйста, проверьте подключение к сети</string>
-    <string name="invalid_rss_error">\"Ошибка: Пожалуйста, проверьте правильность введенного адреса RSS канала\"</string>
-    <string name="rss_input_msg">Введите адрес RSS канала</string>
+    <string name="show_more">Посмотреть полностью</string>
+    <string name="internet_connection_error">Ошибка. Пожалуйста, проверьте подключение к сети и правильность адреса RSS канала</string>
+    <string name="invalid_rss_error">\"Ошибка. Пожалуйста, проверьте правильность введенного адреса RSS канала\"</string>
+    <string name="rss_address_hint">Введите адрес RSS канала</string>
     <string name="preview">Предпросмотр</string>
     <string name="save">Сохранить</string>
     <string name="browser">Браузер</string>

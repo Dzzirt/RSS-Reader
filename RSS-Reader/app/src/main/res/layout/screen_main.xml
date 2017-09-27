@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar" android:id="@+id/toolbar"/>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swiperefreshlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_feed"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/toolbar">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </RelativeLayout>
+
+        <RelativeLayout android:id="@+id/relativelayout_drawer"
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+            <include layout="@layout/layout_rss_item_info"/>
+        </RelativeLayout>
+
+
+    </android.support.v4.widget.DrawerLayout>
+
+</RelativeLayout>

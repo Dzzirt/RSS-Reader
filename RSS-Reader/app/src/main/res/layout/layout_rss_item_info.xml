@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:fresco="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/simpledraweeview_thumbnail"
+            android:layout_width="match_parent"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            fresco:failureImage = "@mipmap/ic_launcher"
+            android:layout_height="200dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textview_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="40dp"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a odio venenatis, ultricies metus non, venenatis quam. Ut mollis urna ut luctus consectetur. Proin sed dignissim nisl. "
+                style="@style/Title"
+                />
+
+            <TextView
+                android:id="@+id/textview_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textview_title"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginBottom="20dp"
+                android:layout_centerHorizontal="true"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a odio venenatis, ultricies metus non, venenatis quam. Ut mollis urna ut luctus consectetur. Proin sed dignissim nisl. Aliquam arcu lorem, convallis id imperdiet sed, facilisis sit amet turpis. Vestibulum porttitor sapien ac odio vehicula, quis rhoncus nisl feugiat. Vivamus id lacus enim. Vestibulum placerat a justo sed blandit. Nulla facilisi. Vestibulum venenatis, lectus nec varius tincidunt, erat lectus hendrerit velit, non consequat sapien lacus gravida elit. Phasellus quis euismod eros, ut luctus elit. Mauris aliquet, quam nec mattis tristique, elit libero malesuada mauris, lacinia ultrices dolor leo ut sapien. Integer rutrum bibendum neque. Donec venenatis nibh a ligula hendrerit, vel sollicitudin lectus vehicula. Cras et condimentum enim, non dignissim odio. Vivamus suscipit facilisis sem in laoreet. Fusce tempor massa id neque laoreet tempor.  Nulla lacus enim, pretium ac vehicula et, lacinia nec orci. Vestibulum a volutpat purus. Duis tristique id augue a aliquet. Suspendisse vitae enim odio. Ut egestas lacus non eros accumsan auctor. Morbi id volutpat urna, eget dignissim risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget tortor laoreet, lobortis enim id, tristique velit. Donec semper urna sit amet viverra efficitur. Ut semper accumsan mauris, laoreet porttitor odio maximus at. Maecenas a hendrerit lacus. Praesent molestie fringilla dictum. Suspendisse sed nulla porttitor, mollis turpis eget, lobortis erat. Aliquam quam enim, mattis ut purus ut, porta viverra risus. Nullam ultrices eros ac purus laoreet pharetra.  Sed tempus libero erat, nec luctus erat placerat eget. Cras vitae risus at neque fermentum accumsan. Duis viverra lorem neque, eget varius nisi vulputate pulvinar. Aliquam sollicitudin, justo non placerat efficitur, lorem massa aliquet augue, nec dapibus lectus risus a turpis. Donec non velit felis. Curabitur aliquet mi vel ultrices bibendum. Donec laoreet nisi et lacus lacinia faucibus."
+                android:ellipsize="end"
+                android:maxLines="8"
+                style="@style/Description"
+                />
+
+            <TextView
+                android:id="@+id/textview_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_alignStart="@+id/textview_description"
+                android:layout_below="@+id/textview_description"
+                android:layout_marginBottom="10dp"
+                tools:text="Dzzirt"
+                android:maxLines="1"
+                android:maxWidth="150dp"/>
+
+            <TextView
+                android:id="@+id/textview_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textview_author"
+                android:layout_toEndOf="@+id/textview_author"
+                android:layout_marginStart="10dp"
+                tools:text="17.02.1996 15:36"/>
+
+            <Button
+                android:id="@+id/button_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_below="@+id/textview_date"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:text="@string/show_more"
+                android:textColor="@android:color/black"
+                android:textStyle="normal|bold|italic"
+                style="@style/Widget.AppCompat.Button" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>
